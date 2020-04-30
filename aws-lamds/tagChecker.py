@@ -3,17 +3,21 @@
 
 import os
 import boto3
-
+import yaml
 
 def send_mail(message):
     sns = boto3.client('sns')
-    response = sns.publish( TopicArn=os.environ['sns_arn'],Message=message,)
+    with open(r'./sns_arn.yml') as file:
+        sns_arnList = yaml.full_load(file)
+    response = sns.publish( TopicArn=sns_arnList[0],Message=message,)
     print(response)
 def lambda_handler(event, context):
     # TODO implement
-    regions=['us-east-2','us-east-1']
-    requiredTagsList=['Name','Project','in_use']
-    for region in regions:
+    with open(r'./regions.yml') as file:
+        regions = yaml.full_load(file)
+    with open(r'./tags.yml') as file:
+        requiredTagsList =  yaml.full_load(file)
+    for region in regions["regions"]:
         tagLessInstanceList=[]
         ec2client = boto3.client('ec2',region_name=region)
         response = ec2client.describe_instances()
