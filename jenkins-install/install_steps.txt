@@ -2,3 +2,4 @@ git clone https://github.com/jayasimha537/DevOps.git
 cd DevOps/jenkins-install/
 docker build -t jay/jenkins .
 docker run -d -p 8080:8080 -p 50000:50000  -v mydata:/var/jenkins_home jay/jenkins
+# open jenkins console in browser
