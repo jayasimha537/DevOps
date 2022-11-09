@@ -2,9 +2,7 @@ FROM jenkins/jenkins:latest
 
 # install jenkins plugins
 COPY ./jenkins-plugins /usr/share/jenkins/plugins
-RUN while read i ; \ 
-		do /usr/local/bin/install-plugins.sh $i ; \
-	done < /usr/share/jenkins/plugins
+RUN jenkins-plugin-cli -f /usr/share/jenkins/plugins
 
 ENV JENKINS_USER admin
 ENV JENKINS_PASS admin
