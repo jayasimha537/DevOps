@@ -1,7 +1,7 @@
 FROM jenkins/jenkins:latest
 
 # install jenkins plugins
-COPY ./jenkins-plugins.txt /usr/share/jenkins/plugins.txt
+COPY  --chown=jenkins:jenkins  ./jenkins-plugins.txt /usr/share/jenkins/plugins.txt
 RUN jenkins-plugin-cli -f /usr/share/jenkins/plugins.txt
 
 ENV JENKINS_USER admin
