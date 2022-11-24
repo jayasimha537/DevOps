@@ -1,5 +1,3 @@
 git
-matrix-auth
-maven-plugin
 blueocean
 pipeline-utility-steps
